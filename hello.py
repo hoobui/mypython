@@ -4,4 +4,6 @@ if 3 > 0:
     print("ok")
     print("fuck")
 
-print("abfdasf" * 50,end='')
+print("abfdasf" * 5)
+
+print('qw' * 20)
