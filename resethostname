@@ -1,0 +1,24 @@
+nmcli connection modify eth0 ipv4.method manual ipv4.addresses 176.121.207.50/24 ipv4.gateway 176.121.207.1 ipv4.dns 176.121.0.100 connection.autoconnect yes;nmcli connection up eth0;echo "nameserver 176.121.0.100" >> /etc/resolv.conf;yum-config-manager --add ftp://176.121.207.182/rhel7;sed -i 's,gpgcheck=1,gpgcheck=0,g' /etc/yum.conf;hostnamectl set-hostname environment
+
+brctl addbr br0
+brctl addif br0 enp1s0
+brctl stp br0 on
+dhclient br0
+
+docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/gitlab -v /srv/gitlab/data gitlab_zh:latest
+
+
+
+ip 176.121.207.10~50
+
+server           ip              desktop1		 desktop2
+environment	     50		  50 
+ansible 		168						168
+elk
+zabbix
+ceph 4   176.121.207.10~13   	 11~12  		 13-14
+web  2 	17~18			 17			 18   LVS+keepalive  docker
+openstack 4   21-24 		 21-24		 23-24
+
+% s/network/bridge/g
+% s/private1/br0/g
